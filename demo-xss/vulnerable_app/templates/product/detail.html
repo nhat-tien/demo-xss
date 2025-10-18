@@ -1,0 +1,242 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - MusicMart{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <!-- Product Images -->
+        <div class="col-lg-5 mb-4">
+            <div class="position-relative">
+                <img src="/media/{{ product.image_url|default:'https://images.unsplash.com/photo-1429043775140-e7c5e4b1f6b7?w=500&h=500&fit=crop' }}" 
+                     class="img-fluid rounded-4 shadow-lg" alt="{{ product.name }}">
+                {% if product.discount %}
+                <span class="badge-gold position-absolute top-0 end-0 m-3">{{ product.discount }}% OFF</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-7">
+            <div class="card border-0 h-100">
+                <div class="card-body">
+                    <h1 class="section-title display-6 fw-bold text-dark mb-2">{{ product.name }}</h1>
+                    <p class="text-muted mb-3">{{ product.category.name }} • {{ product.brand.name }}</p>
+                    
+                    <!-- Price -->
+                    <div class="mb-4">
+                        {% if product.discount %}
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="h3 text-dark fw-bold me-3">${{ product.price|floatformat:0 }}</span>
+                            <span class="h5 text-decoration-line-through text-muted">${{ product.original_price|floatformat:0 }}</span>
+                            <span class="badge bg-gold text-black ms-3">{{ product.discount }}% OFF</span>
+                        </div>
+                        {% else %}
+                        <h3 class="text-dark fw-bold">${{ product.price|floatformat:0 }}</h3>
+                        {% endif %}
+                    </div>
+
+                    <!-- Quantity & Add to Cart -->
+                    <div class="row align-items-end mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-dark mb-2">Quantity</label>
+                            <div class="input-group w-75">
+                                <button class="btn btn-outline-dark border-gold">-</button>
+                                <input type="number" class="form-control text-center border-0" value="1" min="1">
+                                <button class="btn btn-outline-dark border-gold">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-gold btn-lg w-100">
+                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Highlights -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-dark mb-3">
+                            <i class="fas fa-star text-gold me-2"></i>Product Highlights
+                        </h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-gold me-2"></i>Premium {{ product.brand.name }} Quality</li>
+                            <li class="mb-2"><i class="fas fa-check text-gold me-2"></i>Free Shipping over $99</li>
+                            <li class="mb-2"><i class="fas fa-check text-gold me-2"></i>30-Day Return Policy</li>
+                            <li class="mb-2"><i class="fas fa-check text-gold me-2"></i>2-Year Warranty</li>
+                        </ul>
+                    </div>
+
+                    <!-- Stock Status -->
+                    <div class="alert alert-success d-flex align-items-center">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>In Stock:</strong> {{ product.stock }} units available
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Description & Reviews Tabs -->
+    <div class="row">
+        <div class="col-12">
+            <ul class="nav nav-tabs nav-tabs-custom mb-4 justify-content-center" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button">
+                        <i class="fas fa-align-left me-2"></i>Description
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button">
+                        <i class="fas fa-comments me-2"></i>Reviews ({{ comments.count }})
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="productTabsContent">
+                <!-- Description Tab -->
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="section-title fw-bold text-dark mb-4">Product Description</h3>
+                            <p class="lead text-muted mb-4">{{ product.description|linebreaks }}</p>
+                            <h5 class="fw-bold text-dark mb-3">Specifications</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong>Category:</strong> {{ product.category.name }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Brand:</strong> {{ product.brand.name }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Weight:</strong> {{ product.weight|default:"2.5 kg" }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Dimensions:</strong> {{ product.dimensions|default:"45 x 12 x 5 cm" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <!-- Add Comment Form -->
+                    {% if user.is_authenticated %}
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white border-0">
+                            <h5 class="card-title mb-0 fw-bold text-dark">
+                                <i class="fas fa-comment-dots text-gold me-2"></i>Add Your Review
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="{% url 'add_comment' product.id %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <textarea name="text" class="form-control" rows="4" placeholder="Share your experience with this product..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-gold">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Review
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-user-lock fa-3x text-gold mb-3"></i>
+                        <h4 class="text-dark">Login to Write a Review</h4>
+                        <a href="{% url 'login' %}" class="btn btn-gold mt-3">Sign In</a>
+                    </div>
+                    {% endif %}
+
+                    <!-- Comments List -->
+                    <div class="row g-4">
+                        {% for comment in comments %}
+                        <div class="col-12">
+                            <div class="card border-0">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-user-circle fa-3x text-gold"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <h6 class="mb-0 fw-bold text-dark">{{ comment.user.username }}</h6>
+                                                <div class="d-flex">
+                                                    {% for i in comment.rating|make_list %}
+                                                    <i class="fas fa-star text-gold"></i>
+                                                    {% endfor %}
+                                                    <span class="text-muted ms-2 small">{{ comment.created_at|date:"M d, Y" }}</span>
+                                                </div>
+                                            </div>
+                                            {% if unsafe %}
+                                            <p class="text-dark mb-0">{{ comment.text|safe }}</p>
+                                            {% else %}
+                                            <p class="text-dark mb-0">{{ comment.text }}</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-comments fa-3x text-gold mb-3"></i>
+                            <h5 class="text-dark">No reviews yet</h5>
+                            <p class="text-muted">Be the first to share your experience!</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.border-gold { border-color: var(--gold) !important; }
+.cursor-pointer { cursor: pointer; }
+.nav-tabs-custom .nav-link {
+    border: none;
+    padding: 15px 30px;
+    color: var(--black);
+    font-weight: 600;
+}
+.nav-tabs-custom .nav-link.active {
+    background: var(--gold);
+    color: var(--black);
+    border-radius: 15px 15px 0 0;
+}
+.nav-tabs-custom .nav-link:hover { color: var(--gold); }
+.star-rating i:hover,
+.star-rating i:hover ~ i { color: #ffd700 !important; }
+.star-rating i.selected { color: #ffd700 !important; }
+.input-group .btn { border-radius: 0; }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star-rating i');
+    const ratingInput = document.getElementById('rating');
+    
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.dataset.rating;
+            ratingInput.value = rating;
+            
+            stars.forEach(s => s.classList.remove('selected'));
+            stars.forEach((s, index) => {
+                if (index < rating) s.classList.add('selected');
+            });
+        });
+    });
+
+});
+</script>
+{% endblock %}

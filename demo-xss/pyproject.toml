@@ -1,0 +1,11 @@
+[project]
+name = "demo-xss"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "django>=5.2.7",
+    "django-types>=0.22.0",
+    "pillow>=12.0.0",
+]

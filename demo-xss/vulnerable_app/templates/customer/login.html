@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Sign In - MusicMart{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="auth-card">
+                    <div class="auth-image text-center">
+                        <i class="fas fa-user-music"></i>
+                    </div>
+                    
+                    <div class="p-5">
+                        <div class="text-center mb-4">
+                            <h1 class="h3 fw-bold text-dark mb-2">Welcome Back</h1>
+                            <p class="text-muted">Sign in to your account</p>
+                        </div>
+
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-dark">Email Address</label>
+                                <input type="email" name="username" class="form-control" placeholder="your.email@example.com" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-dark">Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember">
+                                    <label class="form-check-label text-muted" for="remember">Remember me</label>
+                                </div>
+                                <a href="" class="auth-link small">Forgot Password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-gold btn-lg mb-4">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </button>
+                        </form>
+
+                        <!-- SAME DIVIDER -->
+                        <div class="divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- SAME SOCIAL BUTTONS -->
+                        <div class="d-grid gap-2 mb-4">
+                            <button class="btn btn-outline-dark border-2">
+                                <i class="fab fa-google me-2"></i>Google
+                            </button>
+                            <button class="btn btn-outline-primary border-2">
+                                <i class="fab fa-facebook-f me-2"></i>Facebook
+                            </button>
+                        </div>
+
+                        <!-- SAME LINK -->
+                        <div class="text-center">
+                            <p class="text-muted mb-0">
+                                Don't have an account? 
+                                <a href="{% url 'register' %}" class="auth-link fw-semibold">Create one here</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+{% endblock %}

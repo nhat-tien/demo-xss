@@ -1,0 +1,214 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-80 justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-h1 mb-4 text-center">Your Musical Masterpiece Awaits</h1>
+                    <p class="lead fs-4 mb-5 opacity-90 text-center">Premium instruments crafted for the discerning musician</p>
+                    <div class="d-flex flex-row justify-content-center">
+                    <a href="#featured" class="btn btn-gold btn-lg">
+                        <i class="fas fa-crown me-2"></i>Discover Collection
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title display-4 fw-bold text-dark mb-3">Shop by Category</h2>
+                <p class="lead text-muted">Curated collections for every musical passion</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card category-card text-center h-100">
+                        <div class="card-body py-5">
+                            <div class="category-icon mb-3"><i class="fas fa-guitar"></i></div>
+                            <h5 class="card-title">Guitars</h5>
+                            <p class="text-muted">Acoustic & Electric</p>
+                            <a href="#" class="btn btn-outline-dark">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card category-card text-center h-100">
+                        <div class="card-body py-5">
+                            <div class="category-icon mb-3"><i class="fas fa-drum"></i></div>
+                            <h5 class="card-title">Drums</h5>
+                            <p class="text-muted">Complete Sets</p>
+                            <a href="#" class="btn btn-outline-dark">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card category-card text-center h-100">
+                        <div class="card-body py-5">
+                            <div class="category-icon mb-3"><i class="fas fa-piano-keyboard"></i></div>
+                            <h5 class="card-title">Keyboards</h5>
+                            <p class="text-muted">Digital Pianos</p>
+                            <a href="#" class="btn btn-outline-dark">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card category-card text-center h-100">
+                        <div class="card-body py-5">
+                            <div class="category-icon mb-3"><i class="fas fa-music"></i></div>
+                            <h5 class="card-title">Accessories</h5>
+                            <p class="text-muted">Premium Selection</p>
+                            <a href="#" class="btn btn-outline-dark">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title display-4 fw-bold text-dark mb-3">Featured Collection</h2>
+                <p class="lead text-muted">Timeless pieces, exceptional value</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1429043775140-e7c5e4b1f6b7?w=300&h=250&fit=crop" 
+                             class="card-img-top" alt="Guitar">
+                        <span class="badge-gold">20% OFF</span>
+                        <div class="card-body">
+                            <h5 class="card-title">Fender Stratocaster</h5>
+                            <p class="card-text text-muted small">Professional Grade</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h5 text-dark fw-bold">$1,199</span>
+                                    <small class="text-decoration-line-through text-muted ms-2">$1,499</small>
+                                </div>
+                                <a href="#" class="btn btn-gold px-3">Add</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1541731328-480b4e5dd8d9?w=300&h=250&fit=crop" 
+                             class="card-img-top" alt="Les Paul">
+                        <span class="badge-gold">15% OFF</span>
+                        <div class="card-body">
+                            <h5 class="card-title">Gibson Les Paul</h5>
+                            <p class="card-text text-muted small">Classic Design</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h5 text-dark fw-bold">$2,299</span>
+                                    <small class="text-decoration-line-through text-muted ms-2">$2,699</small>
+                                </div>
+                                <a href="#" class="btn btn-gold px-3">Add</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1604244170749-1650bd2f8f10?w=300&h=250&fit=crop" 
+                             class="card-img-top" alt="Piano">
+                        <span class="badge-gold">25% OFF</span>
+                        <div class="card-body">
+                            <h5 class="card-title">Yamaha P-125</h5>
+                            <p class="card-text text-muted small">88 Keys</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h5 text-dark fw-bold">$699</span>
+                                    <small class="text-decoration-line-through text-muted ms-2">$929</small>
+                                </div>
+                                <a href="#" class="btn btn-gold px-3">Add</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1578269174936-0757b6e2e4a4?w=300&h=250&fit=crop" 
+                             class="card-img-top" alt="Drums">
+                        <span class="badge-gold">10% OFF</span>
+                        <div class="card-body">
+                            <h5 class="card-title">Pearl Export</h5>
+                            <p class="card-text text-muted small">Complete Kit</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h5 text-dark fw-bold">$899</span>
+                                    <small class="text-decoration-line-through text-muted ms-2">$999</small>
+                                </div>
+                                <a href="#" class="btn btn-gold px-3">Add</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="display-6 fw-bold mb-3">Join Our Exclusive Circle</h3>
+                    <p class="lead mb-0 opacity-90">15% OFF your first purchase + VIP access</p>
+                </div>
+                <div class="col-lg-6">
+                    <form class="newsletter-form d-flex">
+                        <input type="email" class="form-control me-2 flex-grow-1" placeholder="Enter your email">
+                        <button type="submit" class="newsletter-btn px-4">Join</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="section-title mb-3"><i class="fas fa-music me-2" style="color: var(--gold);"></i>MusicMart</h5>
+                    <p class="text-light opacity-75">Curating excellence in musical instruments since 2020.</p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-light">Categories</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light opacity-75">Guitars</a></li>
+                        <li><a href="#" class="text-light opacity-75">Drums</a></li>
+                        <li><a href="#" class="text-light opacity-75">Keyboards</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-light">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light opacity-75">Shipping</a></li>
+                        <li><a href="#" class="text-light opacity-75">Returns</a></li>
+                        <li><a href="#" class="text-light opacity-75">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6 class="text-light">Connect</h6>
+                    <div class="social-icons d-flex">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-light opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-light opacity-75 mb-0">&copy; 2025 MusicMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}ShopDemo{% endblock %}</title>
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Optional: your own stylesheet -->
+  <title>MusicMart - Premium Musical Instruments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'core/css/site.css' %}">
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body class="bg-light">
+  {% if messages %}
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050">
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="fas fa-check-circle me-2"></i>{{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand text-dark" href="/">
+        <i class="fas fa-music me-2" style="color: var(--gold);"></i>MusicMart
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="/#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/#categories">Danh mục</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/#featured">Nổi bật</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/product">Nhạc cụ</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown ms-3">
+            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="fas fa-user-circle me-1"></i>{{ user.email|slice:":15" }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+              <li><a class="dropdown-item" href="{% url 'profile' %}">
+                  <i class="fas fa-user me-2"></i>Profile
+                </a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item text-danger">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item ms-2">
+            <a href="{% url 'login' %}" class="btn btn-outline-dark px-3">
+              <i class="fas fa-sign-in-alt me-1"></i>Login
+            </a>
+          </li>
+          <li class="nav-item ms-2">
+            <a href="{% url 'register' %}" class="btn btn-outline-dark px-3">
+              <i class="fas fa-user-plus me-1"></i>Register
+            </a>
+          </li>
+          {% endif %}
+          <li class="nav-item ms-3">
+            <a class="btn btn-outline-dark px-3" href="#"><i class="fas fa-shopping-cart"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Bootstrap JS bundle (includes Popper) -->
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

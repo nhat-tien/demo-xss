@@ -1,0 +1,150 @@
+[
+  {
+    "model": "vulnerable_app.category",
+    "pk": 1,
+    "fields": {
+      "name": "Guitars"
+    }
+  },
+  {
+    "model": "vulnerable_app.category",
+    "pk": 2,
+    "fields": {
+      "name": "Drums"
+    }
+  },
+  {
+    "model": "vulnerable_app.category",
+    "pk": 3,
+    "fields": {
+      "name": "Keyboards"
+    }
+  },
+  {
+    "model": "vulnerable_app.category",
+    "pk": 4,
+    "fields": {
+      "name": "Accessories"
+    }
+  },
+  {
+    "model": "vulnerable_app.brand",
+    "pk": 1,
+    "fields": {
+      "name": "Fender"
+    }
+  },
+  {
+    "model": "vulnerable_app.brand",
+    "pk": 2,
+    "fields": {
+      "name": "Gibson"
+    }
+  },
+  {
+    "model": "vulnerable_app.brand",
+    "pk": 3,
+    "fields": {
+      "name": "Yamaha"
+    }
+  },
+  {
+    "model": "vulnerable_app.brand",
+    "pk": 4,
+    "fields": {
+      "name": "Pearl"
+    }
+  },
+  {
+    "model": "vulnerable_app.product",
+    "pk": 1,
+    "fields": {
+      "name": "Fender Stratocaster",
+      "description": "Professional-grade electric guitar with classic Strat tone. Perfect for rock, blues, and pop.",
+      "stock": 15,
+      "image_url": "products/products_1.webp",
+      "price": "1199.00",
+      "category": 1,
+      "brand": 1
+    }
+  },
+  {
+    "model": "vulnerable_app.product",
+    "pk": 2,
+    "fields": {
+      "name": "Gibson Les Paul",
+      "description": "Iconic Les Paul with humbucker pickups. The ultimate choice for rock legends.",
+      "stock": 8,
+      "image_url": "products/products_2FI01-JEMJR-BK_2FI01-JEMJR-BK_1644574404980.webp",
+      "price": "2299.00",
+      "category": 1,
+      "brand": 2
+    }
+  },
+  {
+    "model": "vulnerable_app.product",
+    "pk": 3,
+    "fields": {
+      "name": "Yamaha P-125 Digital Piano",
+      "description": "88 weighted keys with Graded Hammer Standard action. Perfect for beginners and pros.",
+      "stock": 22,
+      "image_url": "products/products_2FR11-VAD513-BDL_2FR11-VAD513-BDL_1760593349090.webp",
+      "price": "699.00",
+      "category": 3,
+      "brand": 3
+    }
+  },
+  {
+    "model": "vulnerable_app.product",
+    "pk": 4,
+    "fields": {
+      "name": "Pearl Export Drum Set",
+      "description": "Complete 5-piece drum kit with hardware. Ideal for drummers of all levels.",
+      "stock": 12,
+      "image_url": "products/products_2FR11-VSTAGE88_2FR11-VSTAGE88_1742626566680.webp",
+      "price": "899.00",
+      "category": 2,
+      "brand": 4
+    }
+  },
+  {
+    "model": "vulnerable_app.user",
+    "pk": 1,
+    "fields": {
+      "email": "john@example.com",
+      "is_customer": true,
+      "is_active": true,
+      "is_staff": false,
+      "date_joined": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "vulnerable_app.customerinfo",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "phone_number": "5551234567",
+      "address": "123 Music Street, Sound City, SC 12345"
+    }
+  },
+  {
+    "model": "vulnerable_app.comment",
+    "pk": 1,
+    "fields": {
+      "customer": 1,
+      "product": 1,
+      "text": "Absolutely love this Strat! The tone is incredible and the build quality is top-notch. Best purchase ever!",
+      "created_at": "2025-01-15T10:30:00Z"
+    }
+  },
+  {
+    "model": "vulnerable_app.comment",
+    "pk": 2,
+    "fields": {
+      "customer": 1,
+      "product": 3,
+      "text": "Perfect piano for practice! The weighted keys feel just like a real acoustic. Highly recommend!",
+      "created_at": "2025-01-16T14:20:00Z"
+    }
+  }
+]

@@ -1,0 +1,263 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Products - MusicMart{% endblock %}
+
+{% block content %}
+<!-- Product Header with Search -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="section-title display-5 fw-bold text-dark mb-0">Our Collection</h1>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="fas fa-search text-gold"></i>
+                    </span>
+                    <form method="GET">
+                    <input name="q" type="text" class="form-control ps-0" placeholder="Search instruments..." value="{{ search_query }}">
+                    <input type="submit" hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filters & Products -->
+<div class="container">
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <div class="col-lg-3">
+            <div class="sticky-top" style="top: 100px;">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white border-0">
+                        <h5 class="card-title mb-0 fw-bold text-dark">
+                            <i class="fas fa-filter me-2 text-gold"></i>Filters
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <!-- Category Filter -->
+                        <div class="border-bottom">
+                            <h6 class="px-3 py-3 mb-0 fw-semibold text-dark">Category</h6>
+                            <div class="p-3">
+                                {% for category in categories %}
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="cat{{ category.id }}" value="{{ category.name }}">
+                                    <label class="form-check-label text-muted" for="cat{{ category.id }}">
+                                        {{ category.name }} <span class="badge bg-gold text-black ms-2">{{ category.count }}</span>
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="border-bottom">
+                            <h6 class="px-3 py-3 mb-0 fw-semibold text-dark">Price</h6>
+                            <div class="p-3">
+                                <div class="mb-3">
+                                    <input type="range" class="form-range" min="0" max="5000" value="5000" id="priceRange">
+                                    <div class="d-flex justify-content-between small text-muted">
+                                        <span>$0</span>
+                                        <span class="fw-bold text-gold" id="priceValue">$5,000</span>
+                                        <span>$5,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brand Filter -->
+                        <div class="p-3">
+                            <h6 class="mb-0 fw-semibold text-dark">Brand</h6>
+                            {% for brand in brands %}
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="brand{{ brand.id }}" value="{{ brand.name }}">
+                                <label class="form-check-label text-muted" for="brand{{ brand.id }}">
+                                    {{ brand.name }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-gold w-100">
+                            <i class="fas fa-sync-alt me-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="col-lg-9">
+            <!-- Sort & Results -->
+            <p>Hiển thị tìm kiếm cho {{ search_query }}</p>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="text-muted">
+                    Showing <strong>{{ products|length }}</strong> of <strong>{{ total_products }}</strong> products
+                </span>
+                <div class="d-flex align-items-center">
+                    <span class="text-muted me-2">Sort:</span>
+                    <select class="form-select form-select-sm" style="width: auto;">
+                        <option>Newest</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Best Selling</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row g-4" id="productsGrid">
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card h-100">
+                        <img src="/media/{{ product.image_url|default:'https://images.unsplash.com/photo-1429043775140-e7c5e4b1f6b7?w=300&h=250&fit=crop' }}" 
+                             class="card-img-top" alt="{{ product.name }}">
+                        {% if product.discount %}
+                        <span class="badge-gold">{{ product.discount }}% OFF</span>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text text-muted small">{{ product.category.name }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h5 text-dark fw-bold">
+                                        {% if product.discount %}
+                                            ${{ product.price|floatformat:0 }}
+                                        {% else %}
+                                            ${{ product.price|floatformat:0 }}
+                                        {% endif %}
+                                    </span>
+                                    {% if product.original_price %}
+                                    <small class="text-decoration-line-through text-muted ms-2">
+                                        ${{ product.original_price|floatformat:0 }}
+                                    </small>
+                                    {% endif %}
+                                </div>
+                                <a href="{% if unsafe %}/unsafe{% endif %}{% url 'product_detail' product.id %}" class="btn btn-gold px-3">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="fas fa-music fa-3x text-gold mb-3"></i>
+                        <h3 class="text-dark">No products found</h3>
+                        <p class="text-muted">Try adjusting your filters or search terms</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if products.has_other_pages %}
+            <nav aria-label="Product pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if products.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link text-gold" href="?page=1{% if search_query %}&q={{ search_query }}{% endif %}">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-gold" href="?page={{ products.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in products.paginator.page_range %}
+                        {% if products.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link bg-gold text-black">{{ num }}</span>
+                            </li>
+                        {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link text-gold" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if products.has_next %}
+                        <li class="page-item">
+                            <a class="page-link text-gold" href="?page={{ products.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-gold" href="?page={{ products.paginator.num_pages }}{% if search_query %}&q={{ search_query }}{% endif %}">Last</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Price slider
+    const priceRange = document.getElementById('priceRange');
+    const priceValue = document.getElementById('priceValue');
+    
+    priceRange.addEventListener('input', function() {
+        priceValue.textContent = '$' + this.value.toLocaleString();
+    });
+
+    // Apply filters button
+    document.querySelector('.btn-gold').addEventListener('click', function() {
+        // Add your filter logic here
+        console.log('Filters applied!');
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.text-gold { color: var(--gold) !important; }
+.bg-gold { background: var(--gold) !important; }
+.border-2 { border-width: 2px !important; }
+
+#priceRange::-webkit-slider-thumb {
+    background: var(--gold);
+}
+#priceRange::-moz-range-thumb {
+    background: var(--gold);
+}
+
+.product-card .card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+.sticky-top {
+    z-index: 1020;
+}
+
+.form-check-input:checked {
+    background-color: var(--gold);
+    border-color: var(--gold);
+}
+
+.input-group-text i {
+    color: var(--gold);
+}
+
+@media (max-width: 991px) {
+    .col-lg-3 { order: 2; }
+    .col-lg-9 { order: 1; margin-bottom: 2rem; }
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+</style>
+{% endblock %}
