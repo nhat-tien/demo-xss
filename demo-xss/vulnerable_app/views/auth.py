@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login
 from django.views.defaults import page_not_found
 from django.db import transaction
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from vulnerable_app.models import User, CustomerInfo
 
 
@@ -67,3 +70,20 @@ def logout_view(request):
     return redirect('home')
 
 
+
+@login_required
+def change_password_view(request):
+    """Allow customer to change password"""
+    if request.method == 'POST':
+        form = SetPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Keep user logged in
+            messages.success(request, 'Password changed successfully!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = SetPasswordForm(request.user)
+    
+    return render(request, 'customer/change_password.html', {'form': form})

@@ -67,12 +67,16 @@
                                     <button type="submit" class="btn btn-gold btn-lg w-100 mb-3">
                                         <i class="fas fa-save me-2"></i>Update Profile
                                     </button>
+
                                 </form>
 
                                 <div class="text-center">
                                     <a href="{% url 'logout' %}" class="auth-link fw-semibold">
                                         <i class="fas fa-sign-out-alt me-2"></i>Logout
                                     </a>
+                                    <a href="{% url 'change_password' %}" class="btn btn-outline-gold">
+                                                <i class="fas fa-lock me-2"></i>Change Password
+                                      </a>
                                 </div>
                             </div>
                         </div>

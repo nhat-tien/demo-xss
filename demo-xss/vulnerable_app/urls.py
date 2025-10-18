@@ -16,6 +16,7 @@ urlpatterns = [
     path('comment/<int:product_id>/', comment.add_comment, name="add_comment"),
     path('profile/', customer.profile, name="profile"),
     path('logout/', auth.logout_view, name="logout"),
+    path('change-password/', auth.change_password_view, name='change_password'),
 ]
 
 if settings.DEBUG:
