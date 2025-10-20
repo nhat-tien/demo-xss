@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404 
 from vulnerable_app.models import Product, Category, Brand, Comment
 from django.db.models import Count
 from django.core.paginator import Paginator
@@ -36,6 +36,7 @@ def product_index_unsafe(request):
         'unsafe': True
     }
     return render(request, 'product/index.html', context=context)
+
 
 def product_index_safe(request):
     search_query = request.GET.get('q', '')

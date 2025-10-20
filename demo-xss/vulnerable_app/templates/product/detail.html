@@ -21,6 +21,7 @@
         <div class="col-lg-7">
             <div class="card border-0 h-100">
                 <div class="card-body">
+                  <small>Mã sản phẩm #<span id="inject"></span></small>
                     <h1 class="section-title display-6 fw-bold text-dark mb-2">{{ product.name }}</h1>
                     <p class="text-muted mb-3">{{ product.category.name }} • {{ product.brand.name }}</p>
                     
@@ -194,6 +195,10 @@
         </div>
     </div>
 </div>
+<script>
+    const outputDiv = document.getElementById('inject');
+    outputDiv.innerHTML = decodeURIComponent(location.hash.substring(1));
+</script>
 {% endblock %}
 
 {% block extra_css %}

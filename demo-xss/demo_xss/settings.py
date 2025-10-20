@@ -130,3 +130,24 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTH_USER_MODEL = "vulnerable_app.User"
 
 SESSION_COOKIE_HTTPONLY = False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

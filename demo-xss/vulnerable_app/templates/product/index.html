@@ -138,7 +138,7 @@
                                     </small>
                                     {% endif %}
                                 </div>
-                                <a href="{% if unsafe %}/unsafe{% endif %}{% url 'product_detail' product.id %}" class="btn btn-gold px-3">
+                                <a href="{% if unsafe %}/unsafe{% endif %}{% url 'product_detail' product.id %}#{{ product.id }}" class="btn btn-gold px-3">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </div>
