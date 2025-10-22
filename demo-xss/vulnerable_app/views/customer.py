@@ -17,5 +17,10 @@ def profile(request):
         messages.success(request, 'Profile updated successfully!')
         return redirect('profile')
 
-    return render(request, 'customer/profile.html')
+    context = {
+        "user": user,
+        "customer": customer
+    }
+
+    return render(request, 'customer/profile.html',context=context)
 
